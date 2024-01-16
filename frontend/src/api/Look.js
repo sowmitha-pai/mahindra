@@ -89,3 +89,53 @@ export const drillDown = async () => {
     console.log("Error fetching data:", err.message);
   }
 };
+export const productSale = async () => {
+  try {
+    console.log("called product Sale Data");
+    let response = await axios.get(`${url}/get-data-product-sale`);
+
+    return response.data;
+  } catch (err) {
+    console.log("Error fetching data:", err.message);
+  }
+};
+export const mahindraMetrics = async () => {
+  try {
+    console.log("called mahindra metrics Data");
+    let response = await axios.get(`${url}/get-data-mahindra-metrics`);
+
+    return response.data;
+  } catch (err) {
+    console.log("Error fetching data:", err.message);
+  }
+};
+export const mahindraSalesTrend = async () => {
+  try {
+    console.log("called mahindra sales trend Data");
+    let response = await axios.get(`${url}/get-data-mahindra-sales-trend`);
+
+    return response.data;
+  } catch (err) {
+    console.log("Error fetching data:", err.message);
+  }
+};
+export const expenditure = async () => {
+  try {
+    console.log("called expenditure Data");
+    let response = await axios.get(`${url}/get-data-expenditure`);
+
+    return response.data;
+  } catch (err) {
+    console.log("Error fetching data:", err.message);
+  }
+};
+export const dealership = async () => {
+  try {
+    console.log("called dealership Data");
+    let response = await axios.get(`${url}/get-data-dealership`);
+
+    return response.data;
+  } catch (err) {
+    console.log("Error fetching data:", err.message);
+  }
+};

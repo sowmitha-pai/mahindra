@@ -12,6 +12,13 @@ import LineChart1 from "./linechart1";
 import Piechart from "./piechart";
 
 function Sales({ text, label }) {
+  const [sel_year,setYear]=useState("2022");
+  const selectYearFunc=(event)=>{
+    setYear(event.target.value);
+  }
+  
+          
+        
   const pointers = [
     { id: 1, left: 220, top: 200, content: "Pointer 1: Details go here" },
     { id: 2, left: 120, top: 400, content: "Pointer 2: Details go here" },
@@ -36,9 +43,18 @@ function Sales({ text, label }) {
   return (
     <div style={{ width: "100%" }}>
       <div className="sales" style={{ padding: "20px" }}>
+      <select
+            name="year"
+            id="years"
+            onChange={selectYearFunc}
+          >
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+          </select>
         <div style={{ display: "flex", height: "700px" }}>
           <div style={{ flex: 1 }}>
-            <Leftcard />
+            <Leftcard sel_year={sel_year}/>
           </div>
           <div
             style={{
@@ -185,7 +201,7 @@ function Sales({ text, label }) {
               </div>
             </div>
 
-            {/* <LineChart/> */}
+              <LineChart sel_year={sel_year}/>  
           </div>
           {/* <div style={{ flex: 1, position: "relative", top: "-240px" }}>
             <div style={{ flex: 1 }}>
@@ -194,7 +210,11 @@ function Sales({ text, label }) {
             <div style={{ marginLeft: "-200" }}>
               <LineChart />
             </div>
+            
           </div> */}
+          <div style={{ flex: 1 }}>
+              <LineChart1 sel_year={sel_year}/>
+            </div>
         </div>
       </div>
 

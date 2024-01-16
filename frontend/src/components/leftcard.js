@@ -1,10 +1,88 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import "./style.css";
 import HalfpieChart from "./halfpiechart";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
+import { mahindraMetrics,productSale } from "../api/Look.js"
+import { isMuiElement } from "@mui/material";
+//import { totalSales } from "../../../backend/service/user.service.js";
 
-const leftcard = ({}) => {
+const Leftcard = ({sel_year}) => {
+  let mah_profit=0,mah_rev=0,mah_ts;
+  //const sel_year=2022;
+  let thar_qty,thar_rev,thar_sale=0,scorpio_qty,scorpio_rev,scorpio_sale=0,bolero_rev,bolero_qty,bolero_sale=0,xuv700_qty,xuv700_rev,xuv700_sale=0, xuv300_rev,xuv300_qty,xuv300_sale=0;
+  const [productSaledata,setProductSaleData]=useState([]);
+  const [mahindraMetricsdata,setMahindraMetricsData]=useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await productSale();
+        setProductSaleData(result.success);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  {
+    productSaledata.filter((item)=>item["all_data_iter_4.date_year"]===parseInt(sel_year)).map((item,index)=>{
+      switch(item["all_data_iter_4.product_sku"]){
+        case "Thar":
+          thar_rev=parseInt(item["all_data_iter_4.total_revenue"])
+          thar_qty=item["all_data_iter_4.Total_Sales"]
+          break
+        case "Scorpio Pickup":
+          scorpio_rev=parseInt(item["all_data_iter_4.total_revenue"])
+          scorpio_qty=item['all_data_iter_4.Total_Sales']
+          break
+        case "Bolero Pickup":
+          bolero_rev=parseInt(item["all_data_iter_4.total_revenue"])
+          bolero_qty=item["all_data_iter_4.Total_Sales"]
+          break
+        case "XUV700":
+          xuv700_rev=parseInt(item["all_data_iter_4.total_revenue"])
+          xuv700_qty=item["all_data_iter_4.Total_Sales"]
+          break
+        case "XUV300":
+          xuv300_rev=parseInt(item["all_data_iter_4.total_revenue"])
+          xuv300_qty=item["all_data_iter_4.Total_Sales"]
+          break
+      }
+    }
+    
+
+    )
+  }
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await mahindraMetrics();
+        setMahindraMetricsData(result.success);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  {
+    mahindraMetricsdata.filter((item)=>item["all_data_iter_4.date_year"]===parseInt(sel_year)).map((item,index)=>{
+      mah_rev=item["all_data_iter_4.total_revenue"].toFixed(2)
+      mah_ts=item["all_data_iter_4.Total_Sales"]
+      mah_profit=item["all_data_iter_4.Total_Profit"].toFixed(2)
+    })
+  }
+thar_sale=parseInt(thar_rev/mah_rev*100)
+bolero_sale=parseInt(bolero_rev/mah_rev*100)
+scorpio_sale=parseInt(scorpio_rev/mah_rev*100)
+xuv300_sale=parseInt(xuv300_rev/mah_rev*100)
+xuv700_sale=parseInt(xuv700_rev/mah_rev*100)
+
+
   return (
+    
     <>
       <div style={{ padding: "10px" }}>
         <div
@@ -20,7 +98,7 @@ const leftcard = ({}) => {
         <div
           style={{ marginBottom: "1rem", fontSize: "60px", fontWeight: "600" }}
         >
-          121,987 Cr
+          {mah_rev} Cr
         </div>
         <div>
           <div style={{ display: "flex" }}>
@@ -31,7 +109,7 @@ const leftcard = ({}) => {
                 Total Qty
               </div>
               <div style={{ marginTop: "5px", fontWeight: "900" }}>
-                12,285 Vehicles
+                {mah_ts} Vehicles
               </div>
             </div>
             <div style={{ flex: 1.6 }}>
@@ -41,7 +119,7 @@ const leftcard = ({}) => {
                 Profit
               </div>
               <div style={{ marginTop: "5px", fontWeight: "900" }}>
-                10,282 Cr
+                {mah_profit}Cr
               </div>
             </div>
           </div>
@@ -135,10 +213,10 @@ const leftcard = ({}) => {
               <span
                 style={{ fontSize: "16px", fontWeight: "800", color: "black" }}
               >
-                4,296 Cr
+                {thar_rev} Cr
               </span>
-              <span style={{ color: "gray", fontSize: "16px" }}>320</span>
-              <span style={{ color: "gray", fontSize: "16px" }}>13%</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>{thar_qty}</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>{thar_sale}%</span>
             </div>
             <div
               style={{
@@ -163,10 +241,10 @@ const leftcard = ({}) => {
               <span
                 style={{ fontSize: "16px", fontWeight: "800", color: "black" }}
               >
-                5,125 Cr
+                {xuv700_rev} Cr
               </span>
-              <span style={{ color: "gray", fontSize: "16px" }}>320</span>
-              <span style={{ color: "gray", fontSize: "16px" }}>18%</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>{xuv700_qty}</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>{xuv700_sale}%</span>
             </div>
             <div
               style={{
@@ -191,10 +269,10 @@ const leftcard = ({}) => {
               <span
                 style={{ fontSize: "16px", fontWeight: "800", color: "black" }}
               >
-                5,125 Cr
+                {xuv300_rev} Cr
               </span>
-              <span style={{ color: "gray", fontSize: "16px" }}>320</span>
-              <span style={{ color: "gray", fontSize: "16px" }}>16%</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>{xuv300_qty}</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>{xuv300_sale}%</span>
             </div>
             <div
               style={{
@@ -219,10 +297,10 @@ const leftcard = ({}) => {
               <span
                 style={{ fontSize: "16px", fontWeight: "800", color: "black" }}
               >
-                1000 Cr
+                {bolero_rev} Cr
               </span>
-              <span style={{ color: "gray", fontSize: "16px" }}>320</span>
-              <span style={{ color: "gray", fontSize: "16px" }}>25%</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>{bolero_qty}</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>{bolero_sale}%</span>
             </div>
             <div
               style={{
@@ -247,10 +325,10 @@ const leftcard = ({}) => {
               <span
                 style={{ fontSize: "16px", fontWeight: "800", color: "black" }}
               >
-                1000 Cr
+                {scorpio_rev} Cr
               </span>
-              <span style={{ color: "gray", fontSize: "16px" }}>320</span>
-              <span style={{ color: "gray", fontSize: "16px" }}>28%</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>{scorpio_qty}</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>{scorpio_sale}%</span>
             </div>
             <div>
               <HalfpieChart />
@@ -352,4 +430,4 @@ const leftcard = ({}) => {
   );
 };
 
-export default leftcard;
+export default Leftcard;
