@@ -1,7 +1,7 @@
 .sidebar{
   position: absolute;
   flex: 0.2;
-  left: 80px; 
+  left: 170px; 
   top: 80px;
   border-radius: 8px;
   text-align: center;
@@ -17,11 +17,15 @@
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  margin-top: 30px;
- height: 140px;
+  margin-top: 45px;
+ height: 150px;
  width: 300px;
 
   
+}
+
+.container1 h2, .container1 h4, .container2 h2, .container2 h4, .container3 h2, .container3 h4 {
+  text-align: left;
 }
 
 
@@ -43,19 +47,21 @@
     font-size: 25px;
     font-weight: 600;
     margin-right: 30px;
-    letter-spacing: 2px;
+  
   }
   .container2 h2{
     font-size: 14px;
     color: #AA30DB;
     margin-right: 50px;
     letter-spacing: 2px;
+   
   }
   .container2 h4 {
     font-size: 24px;
     font-weight: 600;
     margin-right: 20px;
-    letter-spacing: 2px;
+   
+  
   }
   
   .container3 h2{
@@ -63,39 +69,52 @@
     color: #369DDC;
     margin-right: 40px;
     letter-spacing: 2px;
+    
   }
  
   .container3 h4 {
     font-size: 25px;
     font-weight: 600;
     margin-right: 20px;
-    letter-spacing: 2px;
+   
   
   }
   .competitors-content h6{
-    font-size: 12px;
+    font-size: 13px;
     margin-right: 40px;
   }
-  .competitors-content{
+  .competitors-content {
     margin-top: 30px;
+    text-align: left; 
   }
 
+  .container1, .container2, .container3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* if you want to center them vertically */
+  }
   
   .competitors-content p{
     
     display: inline-block;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 400;
     
   
   }
-
+  .nextword {
+    margin-top: 10px;
+    text-align: left;
+  }
+  
   .competitors-content .nextword p{
    
     display: inline-block;
     font-size: 23px;
     font-weight: 500;
-    padding-left: 100px;
+    
+    
   }
 
 

@@ -24,30 +24,76 @@ body{
 }
 
 .funnel-container {
-  margin-top: 30px;
+  margin-top: 60px;
   display: flex;
-  /* justify-content: space-between; */
+
   align-items: center;
   gap: 62rem;
   margin-left: -15px;
 }
 .dropdown {
+ 
   display: flex;
+
   align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  
+  background-color: white;
+
+  height: 30px;
+  width: 150px;
+ margin-left: 70px;
+  
+}
+
+
+.dropdown select {
+  border: none;
+  color: #6f7174;
+}
+
+.dropdown select:focus {
+  outline: none;
+  background-color: #ffffff;
+}
+
+.dropdown select {
+  padding-right: 50px;
 }
 
 .copyRightParagraph {
   white-space: nowrap;
-  padding-top: 50%;
+  margin-top: 60px;
   color: #8e918f;
-}
-
-.copyRightParagraph1 {
-  white-space: nowrap;
-  color: #8e918f;
-  margin-left: 40%;
-  margin-top: -5%;
+  font-size: 12px;
 }
 body {
   font-family:  sans-serif; /* Replace with your desired font */
+}
+
+.rightsidecontain{
+  display: flex;
+ 
+  align-items: center;
+  justify-content: center;
+  margin-left: 60px;
+}
+
+.funnel{
+ margin-left: 60px; 
+ font-size: 24px;
+ 
+}
+
+.more-vert-icon{
+  color: #89898B;
+  margin-left: 30px;
+}
+
+.copy{
+  margin-left: 800px;
+  margin-bottom: 100px;
+  color: #8e918f;
+  font-size: 12px;
 }

@@ -13,15 +13,14 @@ export const Footer = styled.div`
   // background-color: black;
   align-items: center;
 
-  ${props =>
+  ${(props) =>
     props.mobile &&
     css`
       @media (max-width: 900px) {
         /* Mobile styles for Sidebar component */
         width: 110%;
         // margin-left: 7%;
-        margin-top:  0px;
-
+        margin-top: 0px;
       }
     `}
 `;
@@ -43,9 +42,9 @@ export const Input = styled.input`
     font-size: 15px;
     font-weight: 400;
     padding-left: 20px;
-   }
+  }
 
-   ${props =>
+  ${(props) =>
     props.mobile &&
     css`
       @media (max-width: 900px) {
@@ -54,15 +53,15 @@ export const Input = styled.input`
       }
     `}
 
-    ${props =>
+  ${(props) =>
     props.mobile &&
     css`
-        @media (max-height: 800px) {
-          /* Mobile styles for Sidebar component */
-          // width: 100%;
-          margin-bottom: 5%;
-        }
-      `}
+      @media (max-height: 800px) {
+        /* Mobile styles for Sidebar component */
+        // width: 100%;
+        margin-bottom: 5%;
+      }
+    `}
 `;
 
 export const Text = styled.p`
@@ -70,10 +69,10 @@ export const Text = styled.p`
   width: 100%;
   margin: 0px;
   padding: 15px 27.5% 15px 10.5%;
-  display:block;
-  overflow:hidden;
+  display: block;
+  overflow: hidden;
 
-  ${props =>
+  ${(props) =>
     props.mobile &&
     css`
       @media (max-width: 900px) {
@@ -109,8 +108,7 @@ export const MessageWrapper = styled.div`
     background-color: transparent;
   }
 
-
-  ${props =>
+  ${(props) =>
     props.mobile &&
     css`
       @media (max-width: 900px) {
@@ -124,10 +122,10 @@ export const MessageWrapper = styled.div`
 export const InputContainer = styled.div`
   position: relative;
   width: 80%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   margin-left: 50px;
 
-  ${props =>
+  ${(props) =>
     props.mobile &&
     css`
       @media (max-width: 900px) {
@@ -137,23 +135,23 @@ export const InputContainer = styled.div`
       }
     `}
 
-    ${props =>
+  ${(props) =>
     props.mobile &&
     css`
-        @media (max-width: 600px) {
-          /* Mobile styles for Sidebar component */
-          // margin-left: 25%;
-        }
-      `}
+      @media (max-width: 600px) {
+        /* Mobile styles for Sidebar component */
+        // margin-left: 25%;
+      }
+    `}
 
-      ${props =>
-        props.mobile &&
-        css`
-            @media (max-width: 600px) {
-              /* Mobile styles for Sidebar component */
-              margin-left: 22.5%;
-            }
-          `}
+      ${(props) =>
+    props.mobile &&
+    css`
+      @media (max-width: 600px) {
+        /* Mobile styles for Sidebar component */
+        margin-left: 22.5%;
+      }
+    `}
 `;
 
 export const SendIconContainer = styled.div`
@@ -161,7 +159,7 @@ export const SendIconContainer = styled.div`
   right: 32%;
   cursor: pointer;
 
-  ${props =>
+  ${(props) =>
     props.mobile &&
     css`
       @media (max-height: 800px) {
@@ -173,7 +171,7 @@ export const SendIconContainer = styled.div`
       }
     `}
 
-  ${props =>
+  ${(props) =>
     props.mobile &&
     css`
       @media (max-width: 900px) {
@@ -185,16 +183,16 @@ export const SendIconContainer = styled.div`
       }
     `}
 
-    ${props =>
+    ${(props) =>
     props.mobile &&
     css`
-        @media (max-width: 600px) {
-          /* Mobile styles for Sidebar component */
-          position: absolute;
-          top: 48%;
-          // right: 38%;
-          // margin-left: 200px;
-          // background-color: yellow;
-        }
-      `}
+      @media (max-width: 600px) {
+        /* Mobile styles for Sidebar component */
+        position: absolute;
+        top: 48%;
+        // right: 38%;
+        // margin-left: 200px;
+        // background-color: yellow;
+      }
+    `}
 `;

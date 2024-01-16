@@ -61,7 +61,7 @@ const App = () => {
 
 
  return (
-   <div className="app" id="app">
+   <div className="app">
      <Router>
        <Header />
        <Routes>
