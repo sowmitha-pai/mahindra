@@ -1,98 +1,201 @@
-import React, { useState,useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { mahindraSalesTrend } from '../api/Look';
-const Linechart1 = () => {
-  const [mahindraSalesTrenddata,setMahindraSalesTrendData]=useState([])
-  let east2020,east2021,east2022,west2020,west2021,west2022,north2020,north2021,north2022,south2020,south2021,south2022;
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await mahindraSalesTrend();
-        setMahindraSalesTrendData(result.success);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
-  mahindraSalesTrenddata.filter((item)=>item["all_data_iter_4.date_year"]===2020).map((item,index)=>{
-    switch(item["all_data_iter_4.zone"]){
-      case "East":
-        east2020=item["all_data_iter_4.total_revenue"]
-        break
-      case "West":
-        west2020=item["all_data_iter_4.total_revenue"]
-        break
-      case "North":
-        north2020=item["all_data_iter_4.total_revenue"]
-        break
-      case "South":
-        south2020=item["all_data_iter_4.total_revenue"]
-        break
+import { React, useState } from "react";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
+import SaveAltOutlinedIcon from "@mui/icons-material/SaveAltOutlined";
+import "../App.css";
+import Cards from "./Cards";
+import Leftcard from "./leftcard";
+import LineChart from "./linechart";
+import LineChart1 from "./linechart1";
+import Piechart from "./piechart";
 
-    }
-  })
-  mahindraSalesTrenddata.filter((item)=>item["all_data_iter_4.date_year"]===2021).map((item,index)=>{
-    switch(item["all_data_iter_4.zone"]){
-      case "East":
-        east2021=item["all_data_iter_4.total_revenue"]
-        break
-      case "West":
-        west2021=item["all_data_iter_4.total_revenue"]
-        break
-      case "North":
-        north2021=item["all_data_iter_4.total_revenue"]
-        break
-      case "South":
-        south2021=item["all_data_iter_4.total_revenue"]
-        break
+function Sales({ text, label }) {
+  const pointers = [
+    { id: 1, left: 220, top: 200, content: "Pointer 1: Details go here" },
+    { id: 2, left: 120, top: 400, content: "Pointer 2: Details go here" },
+    { id: 3, left: 430, top: 380, content: "Pointer 3: Details go here" },
+    { id: 4, left: 235, top: 565, content: "Pointer 4: Details go here" },
+  ];
 
-    }
-  })
-  mahindraSalesTrenddata.filter((item)=>item["all_data_iter_4.date_year"]===2022).map((item,index)=>{
-    switch(item["all_data_iter_4.zone"]){
-      case "East":
-        east2022=item["all_data_iter_4.total_revenue"]
-        break
-      case "West":
-        west2022=item["all_data_iter_4.total_revenue"]
-        break
-      case "North":
-        north2022=item["all_data_iter_4.total_revenue"]
-        break
-      case "South":
-        south2022=item["all_data_iter_4.total_revenue"]
-        break
+  const [zoomLevel, setZoomLevel] = useState(1);
 
+  const handleZoomIn = () => {
+    setZoomLevel((prevZoomLevel) => Math.min(3, prevZoomLevel + 0.1));
+  };
 
-    }
-  })
-    const data = [
-        { name: '2020', North: north2020, East: east2020, West: west2020, South: south2020 },
-        { name: '2021', North: north2021, East: east2021, West: west2021, South: south2021 },
-        { name: '2022', North: north2022, East: east2022, West: west2022, South: south2022 },
-      ];
-      
-      return (
-        
-        <div style={{position:'relative', left:'30%',marginBottom:'30px'}}>
-        <div style={{ width: '60%', border:'1px solid lightgrey',height: 200, padding:'10px' ,borderRadius:'10px' }}>
-            <div style={{fontSize:'18px', color:'grey', fontWeight:'bold', marginLeft:'20px',}}>Sales Trend</div>
-          <ResponsiveContainer>
-            <LineChart data={data} style={{height:'90%'}}>
-              <XAxis dataKey="name" tickLine={false} axisLine={false} />
-              <YAxis domain={[200000, 400000]} axisLine={false} ticks={[200000,240000,280000,320000,360000,400000]} hide={true} tickLine={false} />
-              <Tooltip />
-              {/* <Legend /> */}
-              <Line type="monotone" dataKey="North" stroke="#8884d8" dot={false} />
-              <Line type="monotone" dataKey="East" stroke="#82ca9d" dot={false} />
-              <Line type="monotone" dataKey="West" stroke="#FF5733" dot={false} />
-              <Line type="monotone" dataKey="South" stroke="#FFD700" dot={false} />
-            </LineChart>
-          </ResponsiveContainer>
+  const handleZoomOut = () => {
+    setZoomLevel((prevZoomLevel) => Math.max(0.5, prevZoomLevel - 0.1));
+  };
+
+  const calculateZoomedPosition = (position) => {
+    return position * zoomLevel;
+  };
+
+  return (
+    <div style={{ width: "100%" }}>
+      <div className="sales" style={{ padding: "20px" }}>
+        <div style={{ display: "flex", height: "700px" }}>
+          <div style={{ flex: 1 }}>
+            <Leftcard />
+          </div>
+          <div
+            style={{
+              flex: 2,
+              marginLeft: "-30px",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                transform: `scale(${zoomLevel})`,
+                transition: "transform 0.3s ease-in-out",
+              }}
+            >
+              <img
+                src={"/Map.png"}
+                style={{
+                  width: "650px",
+                  height: "auto",
+                  borderRadius: "8px",
+                  aspectRatio: "auto",
+                  cursor: "grab",
+                }}
+              />
+            </div>
+
+            {pointers.map((pointer) => (
+              <div
+                key={pointer.id}
+                style={{
+                  position: "absolute",
+                  left: calculateZoomedPosition(pointer.left),
+                  top: calculateZoomedPosition(pointer.top),
+                  transform: "translate(-50%, -50%)",
+                  width: "10px",
+                  height: "10px",
+                  backgroundColor: "red", // Customize the color as needed
+                  borderRadius: "50%",
+                  cursor: "pointer",
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "8px",
+                    padding: "10px",
+                    fontSize: "12px",
+                    width: "100px",
+                    height: "15px",
+                    position: "absolute",
+                    bottom: "30px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {/* {pointer.content} */}
+                  <span
+                    style={{
+                      width: "0.5px",
+                      height: "25px",
+                      backgroundColor: "blue",
+                      borderRadius: "2px",
+                      display: "flex",
+                      color: "white",
+                      paddingRight: "4px",
+                    }}
+                  ></span>
+                  <span style={{ padding: "5px" }}>
+                    <p>Northern Zone</p>
+                    <h2>57,445.97</h2>
+                  </span>
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "20px",
+                    left: "50%",
+                    width: 0,
+                    height: 0,
+                    borderLeft: "10px solid transparent",
+                    borderRight: "10px solid transparent",
+                    borderTop: "10px solid #ffffff",
+                    transform: "translateX(-50%)",
+                  }}
+                ></div>
+              </div>
+            ))}
+          </div>
+          <div style={{ position: "absolute", 
+                      top: "20px", left: "20px", 
+                      // backgroundColor:'purple', 
+                      padding:'40px' ,
+                      left: '60%',
+                      top:'20%', 
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '20px'
+                       }}>
+            <button onClick={handleZoomIn} style={{marginBottom: '3px'}}>+</button>
+            <button onClick={handleZoomOut}>-</button>
+          </div>
         </div>
-        </div>
-      );
-    };
+        <div style={{ paddingTop: "50px", display: "flex" }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ width: "100%" }}>
+              <Cards />
+            </div>
+            {/* <Cards /> */}
+          </div>
+          {/* <span></span> */}
+          <div style={{ flex: 1 }}>
+            <div style={{ width: "100%" }}>
+              <div
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "600",
+                  textAlign: "center",
+                  marginBottom: "80px",
+                  marginLeft: "-220px",
+                }}
+              >
+                Inventory metrics
+              </div>
+              <div
+                style={{
+                  marginRight: "200px",
+                  marginLeft: "30px",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <Piechart />
+              </div>
+            </div>
 
-export default Linechart1;
+            {/* <LineChart/> */}
+          </div>
+          <div style={{ flex: 1, position: "relative", top: "-240px" }}>
+            <div style={{ flex: 1 }}>
+              <LineChart1 />
+            </div>
+            <div style={{ marginLeft: "-200" }}>
+              <LineChart />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="copy">
+        <p>Copyright @ 2023 mahindra rise. All rights reserved.</p>
+      </div>
+    </div>
+  );
+}
+
+export default Sales;

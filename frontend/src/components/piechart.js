@@ -1,12 +1,16 @@
 import React, { useCallback, useState } from "react";
-import { PieChart, Pie, Sector } from "recharts";
+import { PieChart, Pie, Sector, Cell } from "recharts";
 
 const data = [
-  { name: "Car", currentPrice: 30000, marketPrice: 35000 ,value:20},
-  { name: "Motorcycle", currentPrice: 15000, marketPrice: 18000 ,value:20},
-  { name: "Truck", currentPrice: 50000, marketPrice: 55000 ,value:20},
-  { name: "SUV", currentPrice: 40000, marketPrice: 45000 ,value:20}
+  { name: "Thar", MarketDemand: 1000, CurrentInventory: 35000, value: 20 },
+  { name: "XUV 700", MarketDemand: 15000, CurrentInventory: 18000, value: 20 },
+  { name: "XUV 300", MarketDemand: 50000, CurrentInventory: 55000, value: 20 },
+  { name: "Bolero", MarketDemand: 40000, CurrentInventory: 45000, value: 20 },
+  { name: "Scorpio", MarketDemand: 20000, CurrentInventory: 22000, value: 20 },
 ];
+
+const COLORS = ["#370a10", "#fa5a5b", "#df1630", "#bd172d", "#621b24"];
+
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
@@ -22,8 +26,8 @@ const renderActiveShape = (props) => {
     percent,
     name,
     value,
-    currentPrice,
-    marketPrice
+    MarketDemand,
+    CurrentInventory,
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -37,6 +41,13 @@ const renderActiveShape = (props) => {
 
   return (
     <g>
+      <rect
+        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        y={ey - 20}
+        width={200}
+        height={100}
+        fill="white"
+      />
       <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
         {payload.name}
       </text>
@@ -72,21 +83,21 @@ const renderActiveShape = (props) => {
       >{`${name}`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
-        y={ey+20}
+        y={ey + 20}
         textAnchor={textAnchor}
         fill="#333"
-      >{`currentPrice ${currentPrice}`}</text>
+      >{`MarketDemand ${MarketDemand}`}</text>
 
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
-        y={ey + 40}  // Adjust the dy value to set the vertical distance between "PV" and "CV"
+        y={ey + 40} // Adjust the dy value to set the vertical distance between "PV" and "CV"
         textAnchor={textAnchor}
         fill="#333"
-      >{`marketPrice ${marketPrice}`}</text>
+      >{`CurrentInventory ${CurrentInventory}`}</text>
 
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
-        y={ey + 40}  // Adjust the dy value to set the vertical distance between "CV" and "(Rate)"
+        y={ey + 60} // Adjust the dy value to set the vertical distance between "CV" and "(Rate)"
         dy={18}
         textAnchor={textAnchor}
         fill="#999"
@@ -95,11 +106,11 @@ const renderActiveShape = (props) => {
       </text>
     </g>
   );
-};
+}; // ... (unchanged code)
 
-
-export default function Piechart() {
+export default function PieChartComponent() {
   const [activeIndex, setActiveIndex] = useState(0);
+
   const onPieEnter = useCallback(
     (_, index) => {
       setActiveIndex(index);
@@ -108,19 +119,26 @@ export default function Piechart() {
   );
 
   return (
-    <PieChart width={700} height={200}>
-      <Pie
-        activeIndex={activeIndex}
-        activeShape={renderActiveShape}
-        data={data}
-        cx={350}
-        cy={150}
-        innerRadius={60}
-        outerRadius={80}
-        fill="#770737"
-        dataKey="value"
-        onMouseEnter={onPieEnter}
-      />
-    </PieChart>
+    <div style={{ marginTop: "-100px" }}>
+      {" "}
+      {/* Adjust this value as needed */}
+      <PieChart width={700} height={300}>
+        <Pie
+          activeIndex={activeIndex}
+          activeShape={renderActiveShape}
+          data={data}
+          cx={350}
+          cy={150}
+          innerRadius={60}
+          outerRadius={80}
+          dataKey="value"
+          onMouseEnter={onPieEnter}
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+      </PieChart>
+    </div>
   );
 }
