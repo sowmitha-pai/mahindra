@@ -17,7 +17,7 @@ const COLORS = ["#F90000", "#CF9CEB", "#9FDDFF"];
 
 const Doughnut = () => {
   return (
-    <PieChart width={1100} height={1300}>
+    <PieChart width={1000} height={1200}>
       <Pie
         data={data}
         cx={220}

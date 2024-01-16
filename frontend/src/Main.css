@@ -10,12 +10,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+
   border-radius: 15px;
 
   background-color: white;
- margin-right: 160px;
-  margin-top: 40px;
+  margin-left: 20rem;
+  margin-top: 60px;
   height: 30px;
   width: 150px;
 
@@ -29,7 +29,7 @@
 
 .containerr1 select {
   border: none;
-  color: black;
+  color: #6f7174;
 }
 
 .containerr1 select:focus {
@@ -46,7 +46,7 @@
 .circle {
   position: absolute;
   left: 320px;
-  top: 60px;
+  top: 80px;
   margin-top: 130px;
   margin-left: 250px;
   width: 600px;
@@ -63,11 +63,11 @@
 
 
 .Mahindra-circle {
-  border-right: 4px solid #F90000;
+  border-right: 4px solid #F80000;
 }
 
 .Tata-circle {
-  border-right: 4px solid #9FDDFF;
+  border-right: 4px solid #00f9ec;
 }
 
 .Maruthi-circle {
@@ -101,20 +101,9 @@
   border-radius: 50%;
   width: 150px;
   height: 150px;
- background-color: transparent;
+  background-color: #F80000;
+  box-shadow: 0 4px 8px 0 #F80000;
   transition: 0.3s;
-}
-
-.Mahindra-circles {
-  background-color:  #F90000;
-}
-
-.Tata-circles {
-  background-color: #9FDDFF;
-}
-
-.Maruthi-circles {
-  background-color:  #CF9CEB;
 }
 
 .circle-5 {
@@ -172,27 +161,27 @@
 /* Card container */
 .card1 {
   position: relative;
-  margin: -150px 80px 30px -45px;
+  margin: -150px 50px 20px -20px;
   padding: 10px;
-  font-size: 13px;
+
   color: gray;
   border-radius: 8px;
   max-width: 400px;
 }
 .card2 {
   position: relative;
-  margin: 20px -60px 30px -370px;
+  margin: 0px 0px 20px -385px;
   padding: 10px;
- font-size: 12.5px;
+
   color: gray;
   border-radius: 8px;
   max-width: 400px;
 }
 .card3 {
   position: relative;
-  margin: 95px -10px -30px 75px;
+  margin: 60px 0px -30px 75px;
   padding: 10px;
- font-size: 13px;
+
   color: gray;
   border-radius: 8px;
   max-width: 400px;
@@ -236,7 +225,7 @@
 .outer3 {
   position: relative;
   border-bottom: 5px solid #9FDDFF;
-
+  /* Change border-top to border-bottom for a flipped direction */
   width: 230px;
   margin-top: 430px;
   margin-right: 150px;
@@ -260,11 +249,6 @@
   margin-top: 40px;
   margin-left: 600px;
 }
-.timeline2 h3{
-  color: black;
-  font-size: 20px;
-    font-weight: 600;
-}
 
 /* Outer Layer with the timeline border */
 
@@ -280,7 +264,7 @@
   max-width: 400px;
 }
 
-
+/* Information about the timeline */
 .info1 {
   display: flex;
   flex-direction: column;
@@ -332,6 +316,6 @@
   height: 10px;
   border-radius: 999px;
   right: 20px;
-  background: #9FDDFF;
-  border: 0.6px solid #9FDDFF;
+  background: #00f9ec;
+  border: 0.6px solid #00f9ec;
 }

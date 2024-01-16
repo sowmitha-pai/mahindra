@@ -7,7 +7,7 @@
   /* #c73232 */
   --profile-icon-color: #c73232;
 
-  --text-item1-color: #4285f4;
+  --text-item1-color: #00f9ec;
   --dropdown-menu-color: 1px solid #4f4f4f;
 }
 
@@ -610,14 +610,13 @@
     left: 75px;
   }
 
-  .AppsOutlinedIcon {
+  /* .AppsOutlinedIcon {
     /* margin-left: 35px; */
-  }
+  
 
-  #niveus-image {
+  /* #niveus-image {
     /* left: -65px; */
-  }
-
+  
   .menu {
     position: absolute;
     display: block;
@@ -659,9 +658,9 @@
     height: 45px; */
   }
 
-  .AppsOutlinedIcon {
+  /* .AppsOutlinedIcon {
     /* margin-left: -19px; */
-  }
+
 
   #niveus-image {
     /* left: 5px; */

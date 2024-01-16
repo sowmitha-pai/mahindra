@@ -11,9 +11,6 @@
     z-index: 999;
   
   }
-  .header__left{
-    margin-right: 200px;
-  }
 
   .header__left p {
     font-family: 'Changa', sans-serif;
@@ -36,9 +33,6 @@
     background-color: #EEF2F4;
     border-radius: 7px;
    }
-   .selected {
-    color: black; /* Change to your preferred highlight color */
-  }
   
    .header__search >input{
     outline: none;
@@ -55,7 +49,7 @@
   .navbar a {
     font-size: 1rem;
     color: #89898B;
-    font-weight: 540;
+    font-weight: 500;
     margin-left: 3.5rem;
     transition: .3s;
     text-decoration: none;
@@ -94,12 +88,11 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-   margin-left: 140px;
+    margin-right: 20px;
     color: gray;
     cursor: pointer;
     font-size: 12px;
     font-weight: 400;
-    margin-right: -60px;
   }
   
   
