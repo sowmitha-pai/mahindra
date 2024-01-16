@@ -1,0 +1,321 @@
+.main {
+
+
+  flex: 0.6;
+
+
+}
+
+.main__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 15px;
+
+  background-color: white;
+  margin-left: 20rem;
+  margin-top: 60px;
+  height: 30px;
+  width: 150px;
+
+
+}
+
+.containerr1 h2 {
+  font-size: 10px;
+
+}
+
+.containerr1 select {
+  border: none;
+  color: #6f7174;
+}
+
+.containerr1 select:focus {
+  outline: none;
+  background-color: #ffffff;
+}
+
+.containerr1 select {
+  padding-right: 50px;
+}
+
+
+
+.circle {
+  position: absolute;
+  left: 320px;
+  top: 80px;
+  margin-top: 130px;
+  margin-left: 250px;
+  width: 600px;
+  height: 600px;
+  background-color: #F3F7FA;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-right: 4px solid #F80000;
+
+
+}
+
+
+.Mahindra-circle {
+  border-right: 4px solid #F80000;
+}
+
+.Tata-circle {
+  border-right: 4px solid #00f9ec;
+}
+
+.Maruthi-circle {
+  border-right: 4px solid #CF9CEB;
+}
+
+.circle-2 {
+
+  border-radius: 50%;
+  width: 530px;
+  height: 530px;
+  background-color: #E9EAF6;
+}
+
+.circle-3 {
+  position: absolute;
+  border-radius: 50%;
+  width: 450px;
+  height: 450px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.circle-3:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.circle-4 {
+  position: absolute;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  background-color: #F80000;
+  box-shadow: 0 4px 8px 0 #F80000;
+  transition: 0.3s;
+}
+
+.circle-5 {
+  position: absolute;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: #FFFFFF;
+
+
+}
+
+
+.copyright {
+  display: flex;
+  align-items: center;
+  margin-top: 830px;
+  margin-right: 850px;
+}
+
+.copyright p {
+  color: #949698;
+  font-size: 12px;
+  font-weight: 500;
+
+}
+
+
+.timeline {
+  display: flex;
+  margin-left: 80px;
+  margin-top: 50px;
+  z-index: 999;
+}
+
+.outer1 {
+  position: relative;
+  border-left: 5px solid #CF9CEB;
+  height: 230px;
+  border-radius: 150%;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+
+
+.outer1::before {
+  top: -6px;
+}
+
+.outer1::after {
+  bottom: -6px;
+}
+
+/* Card container */
+.card1 {
+  position: relative;
+  margin: -150px 50px 20px -20px;
+  padding: 10px;
+
+  color: gray;
+  border-radius: 8px;
+  max-width: 400px;
+}
+.card2 {
+  position: relative;
+  margin: 0px 0px 20px -385px;
+  padding: 10px;
+
+  color: gray;
+  border-radius: 8px;
+  max-width: 400px;
+}
+.card3 {
+  position: relative;
+  margin: 60px 0px -30px 75px;
+  padding: 10px;
+
+  color: gray;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+/* Information about the timeline */
+.info {
+  display: flex;
+  flex-direction: column;
+
+  margin: 20px;
+}
+
+/* Title of the card */
+.title {
+
+  position: relative;
+}
+
+.outer2 {
+
+  position: relative;
+  border-right: 5px solid #F70000;
+  /* Flipped the border to achieve the desired direction */
+  height: 230px;
+  border-radius: 50%;
+
+  margin-top: 50px;
+}
+
+
+
+.outer2::before {
+  top: -6px;
+}
+
+.outer2::after {
+  bottom: -6px;
+}
+
+.outer3 {
+  position: relative;
+  border-bottom: 5px solid #9FDDFF;
+  /* Change border-top to border-bottom for a flipped direction */
+  width: 230px;
+  margin-top: 430px;
+  margin-right: 150px;
+  border-radius: 50%;
+}
+
+.outer3::before {
+  left: -6px;
+}
+
+.outer3::after {
+  right: -6px;
+}
+
+
+
+
+/* Timeline Container */
+.timeline2 {
+
+  margin-top: 40px;
+  margin-left: 600px;
+}
+
+/* Outer Layer with the timeline border */
+
+
+/* Card container */
+.cards {
+  position: relative;
+  margin: 0 0 20px 20px;
+  padding: 10px;
+
+  color: gray;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+/* Information about the timeline */
+.info1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+
+.title::before {
+  /* content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #F90000;
+  border-radius: 999px;
+  left: -39px;
+  border: 0.6px solid #F90000; */
+}
+
+.Maruthi {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  right: 20px;
+  background: #CF9CEB;
+  margin-top: 4px;
+  border: 0.6px solid #CF9CEB;
+}
+
+.Mahindra {
+  content: "";
+  position: absolute;
+  width: 10px;
+  margin-top: 4px;
+  height: 10px;
+  border-radius: 999px;
+  right: 20px;
+  background: #F90000;
+  border: 0.6px solid #F90000;
+}
+
+.Tata {
+  content: "";
+  position: absolute;
+  width: 10px;
+  margin-top: 4px;
+  height: 10px;
+  border-radius: 999px;
+  right: 20px;
+  background: #00f9ec;
+  border: 0.6px solid #00f9ec;
+}

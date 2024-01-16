@@ -1,0 +1,53 @@
+*{
+  margin: 0px;
+  
+}
+body{
+  background-color: #ECF3F7;
+}
+.app{
+  background-color: #ECF3F7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.app__body{
+  display: flex;
+  margin-top: 25px;
+  max-width: 1200px;
+  margin-left: 20px;
+  margin-right: 20px;
+ 
+}
+
+.funnel-container {
+  margin-top: 30px;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  gap: 62rem;
+  margin-left: -15px;
+}
+.dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.copyRightParagraph {
+  white-space: nowrap;
+  padding-top: 50%;
+  color: #8e918f;
+}
+
+.copyRightParagraph1 {
+  white-space: nowrap;
+  color: #8e918f;
+  margin-left: 40%;
+  margin-top: -5%;
+}
+body {
+  font-family:  sans-serif; /* Replace with your desired font */
+}

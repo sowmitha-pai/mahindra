@@ -1,0 +1,311 @@
+.rightsidebar{
+  position: absolute;
+  flex: 0.2;
+  margin-right: 50px;
+  left: 1450px; 
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 25px;
+ 
+ border: 2px solid #DFE6EA;
+ 
+
+  margin-top: 30px;
+ height: 430px;
+ width: 420px;
+
+}
+
+.rightbar__top {
+  display: flex;
+  align-items: center;
+ 
+  padding: 10px;
+}
+
+
+.rightbar__top > p {
+  font-size: 14px;
+  font-weight: 500;
+ margin: 0 10px;
+ color: #484647;
+ 
+}
+
+
+.rightbar__top .topicons {
+ 
+  color: #858789;
+  margin: 0 90px;
+}
+
+
+.rightbar__options{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ 
+  border-radius: 15px;
+  margin-left: 10px;
+
+  border: 2px solid #DFE6EA;
+  margin-top: 10px;
+ height: 30px;
+ width: 150px;
+ 
+  
+  
+}
+
+
+
+ 
+ 
+  .optionscontainer h2{
+    font-size: 10px;
+   
+  }
+  
+  .optionscontainer  select {
+    border: none;
+    background-color: transparent;
+    color: #6f7174;
+  }
+
+  .optionscontainer  select:focus {
+    outline: none;
+    background-color: transparent;
+
+  }
+
+  .optionscontainer  select {
+    padding: 20px; 
+  }
+
+  .yeargraph {
+    margin-left: 10px; 
+    font-weight: 500;
+  }
+
+  .competitorgraph p{
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 50px;
+    color: #484647;
+   
+  }
+
+  .comparecontainer{
+   
+    font-weight: 400;
+    
+    border-radius: 15px;
+   color: #ffffff;
+    background-color: #F90000;
+   padding: 6px;
+   margin-left: 50px;
+   
+  }
+.radiobutton{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+  .first-line{
+    display: flex;
+    margin-right: 20px;
+    margin-bottom: 10px; 
+  }
+  .second-line {
+    display: flex;
+    margin-right: 20px;
+    margin-bottom: 10px; 
+  }
+  .first-line input[type="radio"] {
+    margin-right: 5px; 
+  }
+  .second-line input[type="radio"] {
+    margin-right: 5px; 
+  }
+  input[type='radio']:after {
+    background-color: black;
+  }
+
+  input[type='radio']:checked:after {
+    background-color: black;
+  }
+
+  .year {
+    
+    margin-left: 70px;
+    color:#6f7174 ;
+    font-weight: 500;
+    /* Adjust this value to increase or decrease the spacing */
+  }
+  
+
+  .first-line #mahindra  {
+    margin-left: 20px; 
+  }
+  .first-line  {
+    margin-left: 10px; 
+  }
+  .first-line #tata  {
+    margin-left: 20px; 
+  }
+  .second-line #maruthi  {
+    margin-left: 30px;
+   padding-top: 5px;
+  }
+
+  
+
+  .rightbarbottomcontainer{
+    margin-top: 20px;
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background-color: #C5CACE; /* Change this to the color you want */
+  }
+
+  .rightbarbottom__options{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+   
+   
+    
+    
+  }
+  
+  
+  
+   .options1container{
+    border-radius: 15px;
+    margin-left: 10px;
+  
+    border: 2px solid #DFE6EA;
+    margin-top: 10px;
+   height: 50px;
+   width: 120px;
+   }
+   
+    .options1container h2{
+      font-size: 10px;
+     
+    }
+    
+    .options1container  select {
+      border: none;
+      background-color: transparent;
+      color: #6f7174;
+      padding-left: 20px;
+
+      
+    }
+  
+    .options1container  select:focus {
+      outline: none;
+      background-color: transparent;
+  
+    }
+  
+    .options1container  select {
+      padding: 20px; 
+      padding-left: 0;
+    }
+    .options2container{
+      border-radius: 15px;
+      margin-left: 10px;
+    
+      border: 2px solid #DFE6EA;
+      margin-top: 10px;
+      height: 50px;
+      width: 120px;
+     }
+    
+
+    .options2container h2{
+      font-size: 10px;
+     
+    }
+    
+    .options2container  select {
+      border: none;
+      background-color: transparent;
+      color: #6f7174;
+    }
+  
+    .options2container  select:focus {
+      outline: none;
+      background-color: transparent;
+  
+    }
+  
+    .options2container  select {
+      padding: 20px; 
+    }
+
+    .options1container h2{
+      font-size: 10px;
+     
+    }
+
+    .options3container{
+      border-radius: 15px;
+      margin-left: 10px;
+     margin-top: 5px;
+      border: 2px solid #DFE6EA;
+      height: 50px;
+      width: 130px;
+     }
+    
+    .options3container  select {
+      border: none;
+      background-color: transparent;
+      color: #6f7174;
+    }
+  
+    .options3container  select:focus {
+      outline: none;
+      background-color: transparent;
+  
+    }
+  
+    .options3container  select {
+      padding: 20px; 
+    }
+
+    .data{
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .datafirst-line, .datasecond-line {
+      display: flex;
+      justify-content: space-between;
+      
+    }
+    
+    .datafirst-line p, .datasecond-line h5 {
+      margin-left: 15px;
+      margin-right: 70px;
+      margin-bottom: 5px;
+      
+    }
+    
+    .datafirst-line p {
+      color: #848587;
+      font-weight: 400;
+     
+    }
+    
+    .brandname p{
+      font-size: 18px;
+      font-weight: 500;
+    }
