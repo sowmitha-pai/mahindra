@@ -1,0 +1,50 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.slick-next:before,
+[dir="rtl"] .slick-prev:before {
+  color: black;
+}
+
+.slick-next.slick-disabled:before,
+.slick-prev.slick-disabled:before {
+  opacity: 0.25;
+  color: black;
+}
+.slick-prev:before {
+  color: black;
+}
+.Main_box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  width: 1000px;
+  height: 500px;
+  margin-top: 20px;
+}
+
+.funneldroppoff {
+  color: #8e918f;
+  font-size: 12;
+  padding-top: "5px";
+}
+
+.dots-container {
+  margin-top: -500px;
+}
+
+.dot-group {
+  display: flex;
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
