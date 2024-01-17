@@ -10,15 +10,15 @@ import Leftcard from "./leftcard";
 import LineChart from "./linechart";
 import LineChart1 from "./linechart1";
 import Piechart from "./piechart";
+import Tooltip from "@mui/material/Tooltip";
+import SalesTool from "./SalesTool";
 
 function Sales({ text, label }) {
-  const [sel_year,setYear]=useState("2022");
-  const selectYearFunc=(event)=>{
+  const [sel_year, setYear] = useState("2022");
+  const selectYearFunc = (event) => {
     setYear(event.target.value);
-  }
-  
-          
-        
+  };
+
   const pointers = [
     { id: 1, left: 220, top: 200, content: "Pointer 1: Details go here" },
     { id: 2, left: 120, top: 400, content: "Pointer 2: Details go here" },
@@ -40,21 +40,28 @@ function Sales({ text, label }) {
     return position * zoomLevel;
   };
 
+  const [isHovered1, setIsHovered1] = useState("");
+
+  const handleMouseEnter1 = (e, index) => {
+    setIsHovered1(index);
+    console.log(isHovered1);
+  };
+
+  const handleMouseLeave1 = () => {
+    setIsHovered1(false);
+  };
+
   return (
     <div style={{ width: "100%" }}>
       <div className="sales" style={{ padding: "20px" }}>
-      <select
-            name="year"
-            id="years"
-            onChange={selectYearFunc}
-          >
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
-          </select>
+        <select name="year" id="years" onChange={selectYearFunc}>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+        </select>
         <div style={{ display: "flex", height: "700px" }}>
           <div style={{ flex: 1 }}>
-            <Leftcard sel_year={sel_year}/>
+            <Leftcard sel_year={sel_year} />
           </div>
           <div
             style={{
@@ -64,6 +71,7 @@ function Sales({ text, label }) {
               overflow: "hidden",
             }}
           >
+            {/* MAP */}
             <div
               style={{
                 transform: `scale(${zoomLevel})`,
@@ -79,10 +87,11 @@ function Sales({ text, label }) {
                   aspectRatio: "auto",
                   cursor: "grab",
                 }}
+                alt="map"
               />
             </div>
 
-            {pointers.map((pointer) => (
+            {pointers.map((pointer, index) => (
               <div
                 key={pointer.id}
                 style={{
@@ -96,7 +105,16 @@ function Sales({ text, label }) {
                   borderRadius: "50%",
                   // cursor: "pointer",
                 }}
+                onMouseEnter={(e) => handleMouseEnter1(e, index)}
+                onMouseLeave={handleMouseLeave1}
               >
+                <Tooltip
+                  open={isHovered1 === index}
+                  onClose={handleMouseLeave1}
+                  title={<SalesTool />}
+                >
+                  {/* <SalesTool /> */}
+                </Tooltip>
                 <div
                   style={{
                     backgroundColor: "#ffffff",
@@ -115,7 +133,6 @@ function Sales({ text, label }) {
                     justifyContent: "center",
                   }}
                 >
-                  {/* {pointer.content} */}
                   <span
                     style={{
                       width: "0.5px",
@@ -168,56 +185,33 @@ function Sales({ text, label }) {
             <button onClick={handleZoomOut}>-</button>
           </div>
         </div>
-        <div style={{ paddingTop: "50px", display: "flex" }}>
-          <div style={{ flex: 1 }}>
-            <div style={{ width: "100%" }}>
-              <Cards />
-            </div>
-            {/* <Cards /> */}
-          </div>
-          {/* <span></span> */}
-          <div style={{ flex: 1 }}>
-            <div style={{ width: "100%" }}>
-              <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "600",
-                  textAlign: "center",
-                  marginBottom: "80px",
-                  marginLeft: "-220px",
-                }}
-              >
-                Inventory metrics
-              </div>
-              <div
-                style={{
-                  marginRight: "200px",
-                  marginLeft: "30px",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <Piechart />
-              </div>
-            </div>
 
-              <LineChart sel_year={sel_year}/>  
-          </div>
-          {/* <div style={{ flex: 1, position: "relative", top: "-240px" }}>
-            <div style={{ flex: 1 }}>
-              <LineChart1 />
-            </div>
-            <div style={{ marginLeft: "-200" }}>
-              <LineChart />
-            </div>
-            
-          </div> */}
-          <div style={{ flex: 1 }}>
-              <LineChart1 sel_year={sel_year}/>
-            </div>
+        {/* LINE CHART */}
+        <div
+          style={{
+            flex: 1,
+            // width: "30%",
+            width: "30%",
+            position: "absolute",
+            top: "55%",
+            right: "5rem",
+          }}
+        >
+          <LineChart1 sel_year={sel_year} />
         </div>
       </div>
 
+      {/* CHARTS CONTAINER */}
+      <div className="charts-container">
+        <Cards />
+        <div>
+          <h4 className="pieChart-heading">Inventory metrics</h4>
+          <Piechart />
+        </div>
+
+        <LineChart sel_year={sel_year} />
+      </div>
+      {/* <LineChart sel_year={sel_year} /> */}
       <div className="copy">
         <p>Copyright @ 2023 mahindra rise. All rights reserved.</p>
       </div>

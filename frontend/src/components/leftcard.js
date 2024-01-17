@@ -1,17 +1,36 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./style.css";
 import HalfpieChart from "./halfpiechart";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-import { mahindraMetrics,productSale } from "../api/Look.js"
+import { mahindraMetrics, productSale } from "../api/Look.js";
 import { isMuiElement } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 //import { totalSales } from "../../../backend/service/user.service.js";
 
-const Leftcard = ({sel_year}) => {
-  let mah_profit=0,mah_rev=0,mah_ts;
+const Leftcard = ({ sel_year }) => {
+  let mah_profit = 0,
+    mah_rev = 0,
+    mah_ts;
   //const sel_year=2022;
-  let thar_qty,thar_rev,thar_sale=0,scorpio_qty,scorpio_rev,scorpio_sale=0,bolero_rev,bolero_qty,bolero_sale=0,xuv700_qty,xuv700_rev,xuv700_sale=0, xuv300_rev,xuv300_qty,xuv300_sale=0;
-  const [productSaledata,setProductSaleData]=useState([]);
-  const [mahindraMetricsdata,setMahindraMetricsData]=useState([])
+  let thar_qty,
+    thar_rev,
+    thar_sale = 0,
+    scorpio_qty,
+    scorpio_rev,
+    scorpio_sale = 0,
+    bolero_rev,
+    bolero_qty,
+    bolero_sale = 0,
+    xuv700_qty,
+    xuv700_rev,
+    xuv700_sale = 0,
+    xuv300_rev,
+    xuv300_qty,
+    xuv300_sale = 0;
+  const [productSaledata, setProductSaleData] = useState([]);
+  const [mahindraMetricsdata, setMahindraMetricsData] = useState([]);
+  const clickCount = useRef(0);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,36 +44,36 @@ const Leftcard = ({sel_year}) => {
     fetchData();
   }, []);
   {
-    productSaledata.filter((item)=>item["all_data_iter_4.date_year"]===parseInt(sel_year)).map((item,index)=>{
-      switch(item["all_data_iter_4.product_sku"]){
-        case "Thar":
-          thar_rev=parseInt(item["all_data_iter_4.total_revenue"])
-          thar_qty=item["all_data_iter_4.Total_Sales"]
-          break
-        case "Scorpio Pickup":
-          scorpio_rev=parseInt(item["all_data_iter_4.total_revenue"])
-          scorpio_qty=item['all_data_iter_4.Total_Sales']
-          break
-        case "Bolero Pickup":
-          bolero_rev=parseInt(item["all_data_iter_4.total_revenue"])
-          bolero_qty=item["all_data_iter_4.Total_Sales"]
-          break
-        case "XUV700":
-          xuv700_rev=parseInt(item["all_data_iter_4.total_revenue"])
-          xuv700_qty=item["all_data_iter_4.Total_Sales"]
-          break
-        case "XUV300":
-          xuv300_rev=parseInt(item["all_data_iter_4.total_revenue"])
-          xuv300_qty=item["all_data_iter_4.Total_Sales"]
-          break
-      }
-    }
-    
-
-    )
+    productSaledata
+      .filter(
+        (item) => item["all_data_iter_4.date_year"] === parseInt(sel_year)
+      )
+      .map((item, index) => {
+        switch (item["all_data_iter_4.product_sku"]) {
+          case "Thar":
+            thar_rev = parseInt(item["all_data_iter_4.total_revenue"]);
+            thar_qty = item["all_data_iter_4.Total_Sales"];
+            break;
+          case "Scorpio Pickup":
+            scorpio_rev = parseInt(item["all_data_iter_4.total_revenue"]);
+            scorpio_qty = item["all_data_iter_4.Total_Sales"];
+            break;
+          case "Bolero Pickup":
+            bolero_rev = parseInt(item["all_data_iter_4.total_revenue"]);
+            bolero_qty = item["all_data_iter_4.Total_Sales"];
+            break;
+          case "XUV700":
+            xuv700_rev = parseInt(item["all_data_iter_4.total_revenue"]);
+            xuv700_qty = item["all_data_iter_4.Total_Sales"];
+            break;
+          case "XUV300":
+            xuv300_rev = parseInt(item["all_data_iter_4.total_revenue"]);
+            xuv300_qty = item["all_data_iter_4.Total_Sales"];
+            break;
+        }
+      });
   }
 
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,21 +87,32 @@ const Leftcard = ({sel_year}) => {
     fetchData();
   }, []);
   {
-    mahindraMetricsdata.filter((item)=>item["all_data_iter_4.date_year"]===parseInt(sel_year)).map((item,index)=>{
-      mah_rev=item["all_data_iter_4.total_revenue"].toFixed(2)
-      mah_ts=item["all_data_iter_4.Total_Sales"]
-      mah_profit=item["all_data_iter_4.Total_Profit"].toFixed(2)
-    })
+    mahindraMetricsdata
+      .filter(
+        (item) => item["all_data_iter_4.date_year"] === parseInt(sel_year)
+      )
+      .map((item, index) => {
+        mah_rev = item["all_data_iter_4.total_revenue"].toFixed(2);
+        mah_ts = item["all_data_iter_4.Total_Sales"];
+        mah_profit = item["all_data_iter_4.Total_Profit"].toFixed(2);
+      });
   }
-thar_sale=parseInt(thar_rev/mah_rev*100)
-bolero_sale=parseInt(bolero_rev/mah_rev*100)
-scorpio_sale=parseInt(scorpio_rev/mah_rev*100)
-xuv300_sale=parseInt(xuv300_rev/mah_rev*100)
-xuv700_sale=parseInt(xuv700_rev/mah_rev*100)
+  thar_sale = parseInt((thar_rev / mah_rev) * 100);
+  bolero_sale = parseInt((bolero_rev / mah_rev) * 100);
+  scorpio_sale = parseInt((scorpio_rev / mah_rev) * 100);
+  xuv300_sale = parseInt((xuv300_rev / mah_rev) * 100);
+  xuv700_sale = parseInt((xuv700_rev / mah_rev) * 100);
 
+  const handleButtonCLick = () => {
+    clickCount.current += 1;
+    console.log("Click count");
 
+    if (clickCount.current === 2) {
+      navigate("./Sales");
+      console.log("If double clicked");
+    }
+  };
   return (
-    
     <>
       <div style={{ padding: "10px" }}>
         <div
@@ -148,6 +178,7 @@ xuv700_sale=parseInt(xuv700_rev/mah_rev*100)
               borderRadius: "10px",
               width: "350px",
             }}
+            onClick={handleButtonCLick}
           >
             <div
               style={{
@@ -215,8 +246,12 @@ xuv700_sale=parseInt(xuv700_rev/mah_rev*100)
               >
                 {thar_rev} Cr
               </span>
-              <span style={{ color: "gray", fontSize: "16px" }}>{thar_qty}</span>
-              <span style={{ color: "gray", fontSize: "16px" }}>{thar_sale}%</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>
+                {thar_qty}
+              </span>
+              <span style={{ color: "gray", fontSize: "16px" }}>
+                {thar_sale}%
+              </span>
             </div>
             <div
               style={{
@@ -243,8 +278,12 @@ xuv700_sale=parseInt(xuv700_rev/mah_rev*100)
               >
                 {xuv700_rev} Cr
               </span>
-              <span style={{ color: "gray", fontSize: "16px" }}>{xuv700_qty}</span>
-              <span style={{ color: "gray", fontSize: "16px" }}>{xuv700_sale}%</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>
+                {xuv700_qty}
+              </span>
+              <span style={{ color: "gray", fontSize: "16px" }}>
+                {xuv700_sale}%
+              </span>
             </div>
             <div
               style={{
@@ -271,8 +310,12 @@ xuv700_sale=parseInt(xuv700_rev/mah_rev*100)
               >
                 {xuv300_rev} Cr
               </span>
-              <span style={{ color: "gray", fontSize: "16px" }}>{xuv300_qty}</span>
-              <span style={{ color: "gray", fontSize: "16px" }}>{xuv300_sale}%</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>
+                {xuv300_qty}
+              </span>
+              <span style={{ color: "gray", fontSize: "16px" }}>
+                {xuv300_sale}%
+              </span>
             </div>
             <div
               style={{
@@ -299,8 +342,12 @@ xuv700_sale=parseInt(xuv700_rev/mah_rev*100)
               >
                 {bolero_rev} Cr
               </span>
-              <span style={{ color: "gray", fontSize: "16px" }}>{bolero_qty}</span>
-              <span style={{ color: "gray", fontSize: "16px" }}>{bolero_sale}%</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>
+                {bolero_qty}
+              </span>
+              <span style={{ color: "gray", fontSize: "16px" }}>
+                {bolero_sale}%
+              </span>
             </div>
             <div
               style={{
@@ -327,8 +374,12 @@ xuv700_sale=parseInt(xuv700_rev/mah_rev*100)
               >
                 {scorpio_rev} Cr
               </span>
-              <span style={{ color: "gray", fontSize: "16px" }}>{scorpio_qty}</span>
-              <span style={{ color: "gray", fontSize: "16px" }}>{scorpio_sale}%</span>
+              <span style={{ color: "gray", fontSize: "16px" }}>
+                {scorpio_qty}
+              </span>
+              <span style={{ color: "gray", fontSize: "16px" }}>
+                {scorpio_sale}%
+              </span>
             </div>
             <div>
               <HalfpieChart />
