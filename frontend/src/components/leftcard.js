@@ -108,7 +108,7 @@ const Leftcard = ({ sel_year }) => {
     console.log("Click count");
 
     if (clickCount.current === 2) {
-      navigate("./Sales");
+      navigate("/Funnel");
       console.log("If double clicked");
     }
   };
@@ -178,6 +178,7 @@ const Leftcard = ({ sel_year }) => {
               borderRadius: "10px",
               width: "350px",
             }}
+            className="sales-leftcard-box"
             onClick={handleButtonCLick}
           >
             <div
