@@ -10,6 +10,7 @@ export const getData = async () => {
     console.log("called get-data");
     let response = await axios.get(`${url}/get-data`);
 
+    console.log("Result from getData:", response.data);
     return response.data;
   } catch (err) {
     console.log("Error fetching data:", err.message);
