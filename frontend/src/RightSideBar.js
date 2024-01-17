@@ -305,6 +305,7 @@ import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import React, { useState, useEffect } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { getData, totalSales } from "./api/Look.js";
+import Exporter from "./DownloadPage.js";
 
 import {
   LineChart,
@@ -501,7 +502,7 @@ const RightSideBar = ({ updateSelectedCompany }) => {
             <div className="rightbar__top">
               <p style={{ whiteSpace: "nowrap" }}>Competitors analysis</p>
               <div className="topicons">
-                <FileDownloadOutlinedIcon />
+                <Exporter />
               </div>
             </div>
             <div className="rightbar__options">
