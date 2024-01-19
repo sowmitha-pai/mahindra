@@ -477,3 +477,75 @@ exports.dealership = async (year='2022') => {
     throw error;
   }
 };
+exports.inventoryMetrics = async (year='2022') => {
+  try {
+    const token = await AxiosAuthentication.authenticate();
+    if (!token) {
+      throw new Error('Token not generated...!');
+    }
+
+    const response = await axios.get(`${config.lookerURL}/looks/167`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (response.status !== 200) {
+      return false;
+    }
+
+    const query = response.data.query;
+    const filters = {};
+
+    const body = AxiosWrapper.createBody("mahindra_afs", query.view, query.fields, filters);
+    console.log("Query Body:", body);
+
+    const queryResult = await axios.post(`${config.lookerURL}/queries/run/json`, body, {
+      headers: { Authorization: `Bearer ${token}`, },
+    });
+
+    if (!queryResult || !queryResult?.data) {
+      return false;
+    }
+
+    console.log("Query Result:", queryResult.data);
+    return queryResult.data;
+  } catch (error) {
+    console.log("catch error==", error);
+    throw error;
+  }
+};
+exports.salesMap = async (year='2022') => {
+  try {
+    const token = await AxiosAuthentication.authenticate();
+    if (!token) {
+      throw new Error('Token not generated...!');
+    }
+
+    const response = await axios.get(`${config.lookerURL}/looks/169`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (response.status !== 200) {
+      return false;
+    }
+
+    const query = response.data.query;
+    const filters = {};
+
+    const body = AxiosWrapper.createBody("mahindra_afs", query.view, query.fields, filters);
+    console.log("Query Body:", body);
+
+    const queryResult = await axios.post(`${config.lookerURL}/queries/run/json`, body, {
+      headers: { Authorization: `Bearer ${token}`, },
+    });
+
+    if (!queryResult || !queryResult?.data) {
+      return false;
+    }
+
+    console.log("Query Result:", queryResult.data);
+    return queryResult.data;
+  } catch (error) {
+    console.log("catch error==", error);
+    throw error;
+  }
+};

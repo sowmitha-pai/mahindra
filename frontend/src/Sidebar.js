@@ -204,7 +204,6 @@ export default function SideBar({ updateSelectedYear }) {
 
       <div className="sidebar">
         <div className="competitors-content">
-          <h6>Breadcrumb</h6>
           <div className="nextword">
             <p>Competitors Analysis</p>
           </div>

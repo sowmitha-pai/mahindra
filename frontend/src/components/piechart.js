@@ -1,43 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState,useEffect } from "react";
 import { PieChart, Pie, Sector, Cell } from "recharts";
+import { inventoryMetrics } from "../api/Look";
 
-const data = [
-  {
-    name: "Thar",
-    MarketDemand: "1000",
-    CurrentInventory: "35,000",
-    value: 20,
-    TotalInventory: "1,73,000",
-  },
-  {
-    name: "XUV 700",
-    MarketDemand: "15,000",
-    CurrentInventory: "18,000",
-    value: 20,
-    TotalInventory: "1,17,000",
-  },
-  {
-    name: "XUV 300",
-    MarketDemand: "50,000",
-    CurrentInventory: "55,000",
-    value: 20,
-    TotalInventory: "2,56,000",
-  },
-  {
-    name: "Bolero",
-    MarketDemand: "40,000",
-    CurrentInventory: "45,000",
-    value: 20,
-    TotalInventory: "2,03,000",
-  },
-  {
-    name: "Scorpio",
-    MarketDemand: "20,000",
-    CurrentInventory: "22,000",
-    value: 20,
-    TotalInventory: "1,22,000",
-  },
-];
 
 const COLORS = ["#370a10", "#fa5a5b", "#df1630", "#bd172d", "#621b24"];
 
@@ -176,8 +140,79 @@ const renderActiveShape = (props) => {
   );
 }; // ... (unchanged code)
 
-export default function PieChartComponent() {
+export default function PieChartComponent({sel_year}) {
+  let thar_rev=0,bol_rev=0,sco_rev=0,xuv300_rev=0,xuv700_rev=0;
+  const [inventorydata,setInventoryData]=useState([])
   const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await inventoryMetrics();
+        setInventoryData(result.success);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  inventorydata.filter((item)=>item["all_data_iter_5.date_year"]===parseInt(sel_year)).map((item,index)=>{
+     switch(item["all_data_iter_5.product_sku"]){
+      case "Thar":
+        thar_rev=item["all_data_iter_5.total_inventory"];
+        break
+        case "Bolero Pickup":
+        bol_rev=item["all_data_iter_5.total_inventory"];
+        break
+        case "Scorpio Pickup":
+        sco_rev=item["all_data_iter_5.total_inventory"];
+        break
+        case "XUV300":
+        xuv300_rev=item["all_data_iter_5.total_inventory"];
+        break
+        case "XUV700":
+        xuv700_rev=item["all_data_iter_5.total_inventory"];
+        break
+     }
+   })
+    const data = [
+    {
+      name: "Thar",
+      MarketDemand: "20,000",
+      CurrentInventory: thar_rev,
+      value:80,
+      TotalInventory: "1,73,000",
+    },
+    {
+      name: "XUV 700",
+      MarketDemand: "20,000",
+      CurrentInventory: xuv700_rev,
+      value:80,
+      TotalInventory: "1,17,000",
+    },
+    {
+      name: "XUV 300",
+      MarketDemand: "20,000",
+      CurrentInventory: xuv300_rev,
+      value: 60,
+      TotalInventory: "2,56,000",
+    },
+    {
+      name: "Bolero",
+      MarketDemand: "20,000",
+      CurrentInventory: bol_rev,
+      value: 40,
+      TotalInventory: "2,03,000",
+    },
+    {
+      name: "Scorpio",
+      MarketDemand: "20,000",
+      CurrentInventory: sco_rev,
+      value: 50,
+      TotalInventory: "1,22,000",
+    },
+  ];
+  
 
   const onPieEnter = useCallback(
     (_, index) => {

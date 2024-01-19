@@ -140,3 +140,24 @@ export const dealership = async () => {
     console.log("Error fetching data:", err.message);
   }
 };
+export const inventoryMetrics = async () => {
+  try {
+    console.log("called inventory Data");
+    let response = await axios.get(`${url}/get-data-inventory`);
+
+    return response.data;
+  } catch (err) {
+    console.log("Error fetching data:", err.message);
+  }
+};
+
+export const salesMap = async () => {
+  try {
+    console.log("called sales map Data");
+    let response = await axios.get(`${url}/get-data-sales-map`);
+
+    return response.data;
+  } catch (err) {
+    console.log("Error fetching data:", err.message);
+  }
+};

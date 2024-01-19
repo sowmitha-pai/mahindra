@@ -15,5 +15,6 @@ router.get('/get-data-mahindra-metrics',UserController.mahindraMetrics);
 router.get('/get-data-mahindra-sales-trend',UserController.mahindraSalesTrend);
 router.get('/get-data-expenditure',UserController.expenditure);
 router.get('/get-data-dealership',UserController.dealership);
-
+router.get('/get-data-inventory',UserController.inventoryMetrics);
+router.get('/get-data-sales-map',UserController.salesMap);
 module.exports = router;

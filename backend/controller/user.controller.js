@@ -213,3 +213,35 @@ exports.dealership = async (req, res, next) => {
         next(error);
     }
 }
+exports.inventoryMetrics = async (req, res, next) => {
+    try {
+        console.log('in controller inventory Data==', req.query);
+        //const year = req.query?.year || null;
+
+        const data = await UserService.inventoryMetrics();
+        console.log('inventory data=', data);
+        if (!data) {
+            return res.json({ status: false, success: 'Something went wrong' });
+        };
+
+        res.json({ status: true, success: data });
+    } catch (error) {
+        next(error);
+    }
+}
+exports.salesMap = async (req, res, next) => {
+    try {
+        console.log('in controller Map Data==', req.query);
+        //const year = req.query?.year || null;
+
+        const data = await UserService.salesMap();
+        console.log('sales Map data=', data);
+        if (!data) {
+            return res.json({ status: false, success: 'Something went wrong' });
+        };
+
+        res.json({ status: true, success: data });
+    } catch (error) {
+        next(error);
+    }
+}

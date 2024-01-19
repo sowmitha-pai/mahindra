@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState,useEffect } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
@@ -12,19 +12,29 @@ import LineChart1 from "./linechart1";
 import Piechart from "./piechart";
 import Tooltip from "@mui/material/Tooltip";
 import SalesTool from "./SalesTool";
+import { salesMap } from "../api/Look";
 
 function Sales({ text, label }) {
+  let north_rev=0,south_rev=0,east_rev=0,west_rev=0;
   const [sel_year, setYear] = useState("2022");
+  const [mapdata,setMapData]=useState([])
   const selectYearFunc = (event) => {
     setYear(event.target.value);
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await salesMap();
+        setMapData(result.success);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const pointers = [
-    { id: 1, left: 220, top: 200, content: "Pointer 1: Details go here" },
-    { id: 2, left: 120, top: 400, content: "Pointer 2: Details go here" },
-    { id: 3, left: 430, top: 380, content: "Pointer 3: Details go here" },
-    { id: 4, left: 235, top: 565, content: "Pointer 4: Details go here" },
-  ];
+    fetchData();
+  }, []);
+
+  
 
   const [zoomLevel, setZoomLevel] = useState(1);
 
@@ -50,7 +60,28 @@ function Sales({ text, label }) {
   const handleMouseLeave1 = () => {
     setIsHovered1(false);
   };
-
+  mapdata.filter((item)=>item["all_data_iter_4.date_year"]===parseInt(sel_year)).map((item,index)=>{
+    switch(item["all_data_iter_4.zone"]){
+      case "West":
+        west_rev=item["all_data_iter_4.total_revenue"].toFixed(2);;
+        break
+      case "East":
+        east_rev=item["all_data_iter_4.total_revenue"].toFixed(2);;
+        break
+      case "North":
+        north_rev=item["all_data_iter_4.total_revenue"].toFixed(2);
+        break
+      case "South":
+        south_rev=item["all_data_iter_4.total_revenue"].toFixed(2);;
+        break
+    }
+  })
+  const pointers = [
+    { id: 1, left: 220, top: 200 , color: '#FF0000',content: { title: "Northern Zone", value: north_rev } },
+    { id: 2, left: 120, top: 400 , color:'#FFA500',content: { title: "Western Zone", value: west_rev } },
+    { id: 3, left: 430, top: 380 , color: '#000000',content: { title: "Eastern Zone", value: east_rev } },
+    { id: 4, left: 235, top: 565 , color: '#008000',content: { title: "Southern Zone", value: south_rev } },
+  ];
   return (
     <div style={{ width: "100%" }}>
       <div className="sales" style={{ padding: "20px" }}>
@@ -144,9 +175,9 @@ function Sales({ text, label }) {
                       paddingRight: "4px",
                     }}
                   ></span>
-                  <span style={{ padding: "5px" }}>
-                    <p>Northern Zone</p>
-                    <h2>57,445.97</h2>
+                   <span style={{padding: '8px'}}>
+                    <p>{pointer.content.title}</p>
+                    <h2>{pointer.content.value}</h2>
                   </span>
                 </div>
                 <div
@@ -206,7 +237,7 @@ function Sales({ text, label }) {
         <Cards />
         <div>
           <h4 className="pieChart-heading">Inventory metrics</h4>
-          <Piechart />
+          <Piechart sel_year={sel_year}/>
         </div>
 
         <LineChart sel_year={sel_year} />

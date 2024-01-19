@@ -79,10 +79,10 @@
    
   
   }
-  .competitors-content h6{
+  /* .competitors-content h6{
     font-size: 13px;
     margin-right: 40px;
-  }
+  } */
   .competitors-content {
     margin-top: 30px;
     text-align: left; 
@@ -111,9 +111,8 @@
   .competitors-content .nextword p{
    
     display: inline-block;
-    font-size: 23px;
+    font-size: 30px;
     font-weight: 500;
-    
     
   }
 

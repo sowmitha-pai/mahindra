@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import {
- AreaChart,
- Area,
- CartesianGrid,
- ResponsiveContainer,
- defs,
- linearGradient,
- stop,
- YAxis,
- Tooltip,
+  AreaChart,
+  Area,
+  CartesianGrid,
+  ResponsiveContainer,
+  defs,
+  linearGradient,
+  stop,
+  YAxis,
+  Tooltip,
 } from "recharts";
 import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./style.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import {
  funnelData,
  funnelEntityData,
@@ -184,6 +187,14 @@ const Graph = ({ sel_year }) => {
  const [isHovered3, setIsHovered3] = useState(false);
  const [isHovered4, setIsHovered4] = useState(false);
 
+ const graphstyle = {
+  display: "flex",
+  marginLeft: "90px",
+};
+function formatNumber(num) {
+  return (+num).toLocaleString("en-US");
+}
+
 
  // const handleMouseEnter = () => {
  //   setIsHovered(true);
@@ -244,327 +255,387 @@ const Graph = ({ sel_year }) => {
 
 
  return (
-   <div>
-     <div
-       style={{
-         display: "flex",
-         justifyContent: "space-around",
-         alignItems: "center",
-         border: "1px solid #8e918f",
-         borderRadius: "10px",
-         paddingTop: "20px",
-         marginTop: "50px",
-         position: "relative",
-       }}
-     >
-       <div style={graphContainerStyle}>
-         <div
-           style={{
-             color: "#8e918f",
-             fontSize: 12,
-             display: "flex",
-             paddingLeft: " 20px",
-           }}
-         >
-           Step 1
-         </div>
-         <div
-           style={{
-             display: "flex",
-             paddingLeft: " 20px",
-             paddingTop: "20px",
-             fontSize: 14,
-           }}
-         >
-           Enquiries
-         </div>
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "flex-start", // or "center"
+      alignItems: "center",
+      border: "2px solid #DFE6EA",
+      borderRadius: "10px",
+      paddingTop: "20px",
+      marginTop: "40px",
+      marginLeft: "30px",
+      height: "650px",
+      width: "1600px",
+    }}
+  >
+    <div style={graphstyle}>
+      <div style={graphContainerStyle}>
+        <div
+          style={{
+            color: "#8e918f",
+            fontSize: 14,
+            display: "flex",
+            paddingLeft: " 20px",
+          }}
+        >
+          Step 1
+        </div>
+        <div
+          style={{
+            display: "flex",
+            paddingLeft: " 20px",
+            paddingTop: "20px",
+            fontSize: 16,
+          }}
+        >
+          Enquiries
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: " 20px",
+            paddingTop: "5px",
+          }}
+        >
+          <span style={{ fontWeight: "bold", fontSize: "25px" }}>
+            {formatNumber(enq_a)}
+          </span>
+          <span
+            style={{ color: "#8e918f", fontSize: "14px", marginTop: "5px" }}
+          >
+            {formatNumber(enq_b)} last year
+          </span>
+        </div>
+        <ResponsiveContainer width={350} height={350}>
+          <AreaChart data={data}>
+          <Tooltip active={isHovered1} content={<TooltipBar_Enq sel_year={sel_year}/>} />
 
+            <defs>
+              <linearGradient id="gradient1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="red" />
+                <stop offset="95%" stopColor="maroon" />
+              </linearGradient>
+            </defs>
+            <YAxis
+              domain={[20000000, 40000000]}
+              ticks={[
+                20000000, 24000000, 28000000, 32000000, 36000000, 40000000,
+              ]}
+              hide={true}
+              tickLine={false}
+            />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Area
+              onMouseEnter={handleMouseEnter1}
+              onMouseLeave={handleMouseLeave1}
+              type="monotone"
+              dataKey="value"
+              stroke="#8884d8"
+              fill="url(#gradient1)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
 
-         <div
-           style={{
-             display: "flex",
-             justifyContent: "space-between",
-             padding: " 20px",
-             paddingTop: "5px",
-           }}
-         >
-           <span style={{ fontWeight: "bold" }}>{enq_a}</span><span>{enq_b} last year</span>
-         </div>
+        <div style={{ marginTop: "10px" }}>
+          <FontAwesomeIcon
+            icon={faArrowCircleDown}
+            style={{ color: "#F90000", height: "28px" }}
+          />
+        </div>
+        <div style={{ color: "#8e918f", fontSize: 14, paddingTop: "5px" }}>
+          Drop off
+        </div>
+        <div
+          style={{
+            color: "#F90000",
+            paddingTop: "5px",
+            fontWeight: "600",
+            fontSize: "20px",
+          }}
+        >
+          {drop_off1}%
+        </div>
+        <div style={graphLineStyle}></div>
+      </div>
 
+      <div style={graphContainerStyle1}>
+        <div
+          style={{
+            color: "#8e918f",
+            fontSize: 14,
+            display: "flex",
+            paddingLeft: " 20px",
+          }}
+        >
+          Step 2
+        </div>
+        <div
+          style={{
+            display: "flex",
+            paddingLeft: " 20px",
+            paddingTop: "20px",
+            fontSize: 16,
+          }}
+        >
+          Test drives
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: " 20px",
+            paddingTop: "5px",
+          }}
+        >
+          <span style={{ fontWeight: "bold", fontSize: "25px" }}>
+            {formatNumber(td_a)}
+          </span>
+          <span
+            style={{ color: "#8e918f", fontSize: "14px", marginTop: "5px" }}
+          >
+            {formatNumber(td_b)} last year
+          </span>
+        </div>
+        <ResponsiveContainer width={350} height={350}>
+          <AreaChart data={data1}>
+          <Tooltip active={isHovered2} content={<TooltipBar_testDrives sel_year={sel_year}/>} />
 
-         <ResponsiveContainer width={300} height={300}>
-           <AreaChart data={data}>
-             <Tooltip active={isHovered1} content={<TooltipBar_Enq sel_year={sel_year}/>} />
-             <defs>
-               <linearGradient id="gradient1" x1="0" y1="0" x2="0" y2="1">
-                 <stop offset="5%" stopColor="red" />
-                 <stop offset="95%" stopColor="maroon" />
-               </linearGradient>
-             </defs>
-             <YAxis
-               domain={[20000000, 40000000]}
-               ticks={[
-                 20000000, 24000000, 28000000, 32000000, 36000000, 40000000,
-               ]}
-               hide={true}
-               tickLine={false}
-             />
-             <CartesianGrid strokeDasharray="3 3" />
+            <defs>
+              <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="red" />
+                <stop offset="95%" stopColor="maroon" />{" "}
+                {/* Change the stopColor here */}
+              </linearGradient>
+            </defs>
+            <YAxis
+              domain={[20000000, 40000000]}
+              ticks={[
+                20000000, 24000000, 28000000, 32000000, 36000000, 40000000,
+              ]}
+              hide={true}
+              tickLine={false}
+            />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Area
+              onMouseEnter={handleMouseEnter2}
+              onMouseLeave={handleMouseLeave2}
+              type="monotone"
+              dataKey="value"
+              stroke="#8884d8"
+              fill="url(#gradient2)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
 
+        <div style={{ marginTop: "10px" }}>
+          <FontAwesomeIcon
+            icon={faArrowCircleDown}
+            style={{ color: "#F90000", height: "28px" }}
+          />
+        </div>
+        <div style={{ color: "#8e918f", fontSize: 14, paddingTop: "5px" }}>
+          Drop off
+        </div>
+        <div
+          style={{
+            color: "#F90000",
+            paddingTop: "5px",
+            fontWeight: "600",
+            fontSize: "20px",
+          }}
+        >
+          {drop_off2}%
+        </div>
+        <div style={graphLineStyle}></div>
+      </div>
 
-             <Area
-               onMouseEnter={handleMouseEnter1}
-               onMouseLeave={handleMouseLeave1}
-               type="monotone"
-               dataKey="value"
-               stroke="#8884d8"
-               fill="url(#gradient1)"
-             />
-           </AreaChart>
-         </ResponsiveContainer>
-         <div>1</div>
-         <div>
-           <ArrowCircleDownIcon color="error" />
-         </div>
-         <div style={{ color: "#8e918f", fontSize: 12, paddingTop: "5px" }}>
-           drop off
-         </div>
-         <div style={{ color: "red", paddingTop: "5px" }}>{drop_off1}%</div>
-         <div style={graphLineStyle}></div>
-       </div>
+      <div style={graphContainerStyle2}>
+        <div
+          style={{
+            color: "#8e918f",
+            fontSize: 14,
+            display: "flex",
+            paddingLeft: " 20px",
+          }}
+        >
+          Step 3
+        </div>
+        <div
+          style={{
+            display: "flex",
+            paddingLeft: " 20px",
+            paddingTop: "20px",
+            fontSize: 16,
+          }}
+        >
+          Bookings
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: " 20px",
+            paddingTop: "5px",
+          }}
+        >
+          <span style={{ fontWeight: "bold", fontSize: "25px" }}>
+            {formatNumber(bk_a)}
+          </span>
+          <span
+            style={{ color: "#8e918f", fontSize: "14px", marginTop: "5px" }}
+          >
+            {formatNumber(bk_b)} last year
+          </span>
+        </div>
+        <ResponsiveContainer width={350} height={350}>
+          <AreaChart data={data2}>
+          <Tooltip active={isHovered3} content={<TooltipBar_bk sel_year={sel_year}/>} />
 
+            <defs>
+              <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="red" />
+                <stop offset="95%" stopColor="maroon" />
+              </linearGradient>
+            </defs>
+            <YAxis
+              domain={[20000000, 40000000]}
+              ticks={[
+                20000000, 24000000, 28000000, 32000000, 36000000, 40000000,
+              ]}
+              hide={true}
+              tickLine={false}
+            />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Area
+              onMouseEnter={handleMouseEnter3}
+              onMouseLeave={handleMouseLeave3}
+              type="monotone"
+              dataKey="value"
+              stroke="#8884d8"
+              fill="url(#gradient2)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
 
-       <div style={graphContainerStyle1}>
-         <div
-           style={{
-             color: "#8e918f",
-             fontSize: 12,
-             display: "flex",
-             paddingLeft: " 20px",
-           }}
-         >
-           Step 2
-         </div>
-         <div
-           style={{
-             display: "flex",
-             paddingLeft: " 20px",
-             paddingTop: "20px",
-             fontSize: 14,
-           }}
-         >
-           Test drives
-         </div>
-         <div
-           style={{
-             display: "flex",
-             justifyContent: "space-between",
-             padding: " 20px",
-             paddingTop: "5px",
-           }}
-         >
-           <span style={{ fontWeight: "bold" }}>{td_a}</span><span>{td_b} last year</span>
-         </div>
+        <div style={{ marginTop: "10px" }}>
+          <FontAwesomeIcon
+            icon={faArrowCircleDown}
+            style={{ color: "#F90000", height: "28px" }}
+          />
+        </div>
+        <div style={{ color: "#8e918f", fontSize: 14, paddingTop: "5px" }}>
+          Drop off
+        </div>
+        <div
+          style={{
+            color: "#F90000",
+            paddingTop: "5px",
+            fontWeight: "600",
+            fontSize: "20px",
+          }}
+        >
+          {drop_off3}%
+        </div>
+        <div style={graphLineStyle}></div>
+      </div>
 
+      <div style={graphContainerStyle3}>
+        <div
+          style={{
+            color: "#8e918f",
+            fontSize: 14,
+            display: "flex",
+            paddingLeft: " 20px",
+          }}
+        >
+          Step 4
+        </div>
+        <div
+          style={{
+            display: "flex",
+            paddingLeft: " 20px",
+            paddingTop: "20px",
+            fontSize: 16,
+          }}
+        >
+          Purchases
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: " 20px",
+            paddingTop: "5px",
+          }}
+        >
+          <span style={{ fontWeight: "bold", fontSize: "25px" }}>
+            {formatNumber(ts_a)}
+          </span>
+          <span
+            style={{ color: "#8e918f", fontSize: "14px", marginTop: "5px" }}
+          >
+            {formatNumber(ts_b)} last year
+          </span>
+        </div>
+        <ResponsiveContainer width={350} height={350}>
+          <AreaChart data={data3}>
+          <Tooltip active={isHovered4} content={<TooltipBar_ts sel_year={sel_year}/>} />
 
-         <ResponsiveContainer width={300} height={300}>
-           <AreaChart data={data1}>
-             <Tooltip active={isHovered2} content={<TooltipBar_testDrives sel_year={sel_year}/>} />
+            <defs>
+              <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="red" />
+                <stop offset="95%" stopColor="maroon" />
+              </linearGradient>
+            </defs>
+            <YAxis
+              domain={[20000000, 40000000]}
+              ticks={[
+                20000000, 24000000, 28000000, 32000000, 36000000, 40000000,
+              ]}
+              hide={true}
+              tickLine={false}
+            />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Area
+              onMouseEnter={handleMouseEnter4}
+              onMouseLeave={handleMouseLeave4}
+              type="monotone"
+              dataKey="value"
+              stroke="#8884d8"
+              fill="url(#gradient2)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
 
-
-             <defs>
-               <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
-                 <stop offset="5%" stopColor="red" />
-                 <stop offset="95%" stopColor="maroon" />
-               </linearGradient>
-             </defs>
-             <YAxis
-               domain={[20000000, 40000000]}
-               ticks={[
-                 20000000, 24000000, 28000000, 32000000, 36000000, 40000000,
-               ]}
-               hide={true}
-               tickLine={false}
-             />
-             <CartesianGrid strokeDasharray="3 3" />
-             <Area
-               type="monotone"
-               dataKey="value"
-               stroke="#8884d8"
-               fill="url(#gradient2)"
-               onMouseEnter={handleMouseEnter2}
-               onMouseLeave={handleMouseLeave2}
-             />
-           </AreaChart>
-         </ResponsiveContainer>
-         <div>2</div>
-         <div>
-           <ArrowCircleDownIcon color="error" />
-         </div>
-         <div style={{ color: "#8e918f", fontSize: 12, paddingTop: "5px" }}>
-           drop off
-         </div>
-         <div style={{ color: "red", paddingTop: "5px" }}>{drop_off2}%</div>
-         <div style={graphLineStyle}></div>
-       </div>
-
-
-       <div style={graphContainerStyle2}>
-         <div
-           style={{
-             color: "#8e918f",
-             fontSize: 12,
-             display: "flex",
-             paddingLeft: " 20px",
-           }}
-         >
-           Step 3
-         </div>
-         <div
-           style={{
-             display: "flex",
-             paddingLeft: " 20px",
-             paddingTop: "20px",
-             fontSize: 14,
-           }}
-         >
-           Bookings
-         </div>
-         <div
-           style={{
-             display: "flex",
-             justifyContent: "space-between",
-             padding: " 20px",
-             paddingTop: "5px",
-           }}
-         >
-           <span style={{ fontWeight: "bold" }}>{bk_a}</span><span>{bk_b} last year</span>
-         </div>
-
-
-         <ResponsiveContainer width={300} height={300}>
-           <AreaChart data={data2}>
-             <Tooltip active={isHovered3} content={<TooltipBar_bk sel_year={sel_year}/>} />
-
-
-             <defs>
-               <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
-                 <stop offset="5%" stopColor="red" />
-                 <stop offset="95%" stopColor="maroon" />
-               </linearGradient>
-             </defs>
-             <YAxis
-               domain={[20000000, 40000000]}
-               ticks={[
-                 20000000, 24000000, 28000000, 32000000, 36000000, 40000000,
-               ]}
-               hide={true}
-               tickLine={false}
-             />
-             <CartesianGrid strokeDasharray="3 3" />
-             <Area
-               type="monotone"
-               dataKey="value"
-               stroke="#8884d8"
-               fill="url(#gradient2)"
-               onMouseEnter={handleMouseEnter3}
-               onMouseLeave={handleMouseLeave3}
-             />
-           </AreaChart>
-         </ResponsiveContainer>
-         <div>3</div>
-         <div>
-           <ArrowCircleDownIcon color="error" />
-         </div>
-         <div style={{ color: "#8e918f", fontSize: 12, paddingTop: "5px" }}>
-           drop off
-         </div>
-         <div style={{ color: "red", paddingTop: "5px" }}>{drop_off3}%</div>
-         <div style={graphLineStyle}></div>
-       </div>
-
-
-       <div style={graphContainerStyle3}>
-         <div
-           style={{
-             color: "#8e918f",
-             fontSize: 12,
-             display: "flex",
-             paddingLeft: " 20px",
-           }}
-         >
-           Step 4
-         </div>
-         <div
-           style={{
-             display: "flex",
-             paddingLeft: " 20px",
-             paddingTop: "20px",
-             fontSize: 14,
-           }}
-         >
-           Purchases
-         </div>
-         <div
-           style={{
-             display: "flex",
-             justifyContent: "space-between",
-             padding: " 20px",
-             paddingTop: "5px",
-           }}
-         >
-           <span style={{ fontWeight: "bold" }}>{ts_a}</span><span>{ts_b} last year</span>
-         </div>
-
-
-         <ResponsiveContainer width={300} height={300} onClick>
-           <AreaChart data={data3}>
-             <Tooltip active={isHovered4} content={<TooltipBar_ts sel_year={sel_year}/>} />
-
-
-             <defs>
-               <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
-                 <stop offset="5%" stopColor="red" />
-                 <stop offset="95%" stopColor="maroon" />
-               </linearGradient>
-             </defs>
-             <YAxis
-               domain={[20000000, 40000000]}
-               ticks={[
-                 20000000, 24000000, 28000000, 32000000, 36000000, 40000000,
-               ]}
-               hide={true}
-               tickLine={false}
-             />
-             <CartesianGrid strokeDasharray="3 3" />
-             <Area
-               type="monotone"
-               dataKey="value"
-               stroke="#8884d8"
-               fill="url(#gradient2)"
-               onMouseEnter={handleMouseEnter4}
-               onMouseLeave={handleMouseLeave4}
-             />
-           </AreaChart>
-         </ResponsiveContainer>
-         <div>4</div>
-         <div>
-           <CheckCircleIcon style={{ color: "green" }} />
-         </div>
-         <div
-           classname="funneldroppoff"
-           style={{ color: "#8e918f", fontSize: 12, paddingTop: "5px" }}
-         >
-           Conversion
-         </div>
-         <div style={{ color: "green", paddingTop: "5px" }}>{conversion}%</div>
-         {/* <div style={graphLineStyle}></div> */}
-       </div>
-     </div>
-     <div></div>
-   </div>
- );
+        <div style={{ marginTop: "10px" }}>
+          <FontAwesomeIcon
+            icon={faCircleCheck}
+            style={{ color: "#00C066", height: "28px" }}
+          />
+        </div>
+        <div
+          classname="funneldroppoff"
+          style={{ color: "#8e918f", fontSize: 12, paddingTop: "5px" }}
+        >
+          Conversion
+        </div>
+        <div
+          style={{
+            color: "#00C066",
+            paddingTop: "5px",
+            fontWeight: "600",
+            fontSize: "20px",
+          }}
+        >
+          {conversion}%
+        </div>
+        {/* <div style={graphLineStyle}></div> */}
+      </div>
+    </div>
+  </div>
+);
 };
-
 
 export default Graph;
