@@ -630,19 +630,21 @@ const RightSideBar = ({ updateSelectedCompany }) => {
 
         <div className="competitorgraph" style={{ width: "100%" }}>
           <p>Competitors analysis</p>
-          <ResponsiveContainer width="100%" height={200}> {/* Reduced height */}
-  <LineChart
-    width={500}
-    height={200} 
-    data={data}
-    margin={{
-      top: 20,
-      right: 20,
-      left: 20,
-      bottom: 0,
-    }}
-    fill="transparent"
-  >
+          <ResponsiveContainer width="100%" height={200}>
+            {" "}
+            {/* Reduced height */}
+            <LineChart
+              width={500}
+              height={200}
+              data={data}
+              margin={{
+                top: 20,
+                right: 20,
+                left: 20,
+                bottom: 0,
+              }}
+              fill="transparent"
+            >
               <Tooltip />
               <Line
                 type="monotone"
