@@ -11,7 +11,7 @@ import { useState } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [selectedPage, setSelectedPage] = useState("");
+  const [selectedPage, setSelectedPage] = useState("Competitors");
   // const handleNavClick = (event) => {
   //   const navLinks = document.querySelectorAll(".navbar a");
   //   navLinks.forEach((link) => {

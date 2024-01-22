@@ -1,10 +1,11 @@
-import { React, useState,useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
 import SaveAltOutlinedIcon from "@mui/icons-material/SaveAltOutlined";
 import "../App.css";
 import "./style.css";
+import "../sales.css";
 import Cards from "./Cards";
 import Leftcard from "./leftcard";
 import LineChart from "./linechart";
@@ -15,9 +16,12 @@ import SalesTool from "./SalesTool";
 import { salesMap } from "../api/Look";
 
 function Sales({ text, label }) {
-  let north_rev=0,south_rev=0,east_rev=0,west_rev=0;
+  let north_rev = 0,
+    south_rev = 0,
+    east_rev = 0,
+    west_rev = 0;
   const [sel_year, setYear] = useState("2022");
-  const [mapdata,setMapData]=useState([])
+  const [mapdata, setMapData] = useState([]);
   const selectYearFunc = (event) => {
     setYear(event.target.value);
   };
@@ -33,8 +37,6 @@ function Sales({ text, label }) {
 
     fetchData();
   }, []);
-
-  
 
   const [zoomLevel, setZoomLevel] = useState(1);
 
@@ -54,42 +56,63 @@ function Sales({ text, label }) {
 
   const handleMouseEnter1 = (e, index) => {
     setIsHovered1(index);
-    console.log(isHovered1);
+    // console.log(index);
   };
 
   const handleMouseLeave1 = () => {
     setIsHovered1(false);
   };
-  mapdata.filter((item)=>item["all_data_iter_4.date_year"]===parseInt(sel_year)).map((item,index)=>{
-    switch(item["all_data_iter_4.zone"]){
-      case "West":
-        west_rev=item["all_data_iter_4.total_revenue"].toFixed(2);;
-        break
-      case "East":
-        east_rev=item["all_data_iter_4.total_revenue"].toFixed(2);;
-        break
-      case "North":
-        north_rev=item["all_data_iter_4.total_revenue"].toFixed(2);
-        break
-      case "South":
-        south_rev=item["all_data_iter_4.total_revenue"].toFixed(2);;
-        break
-    }
-  })
+  mapdata
+    .filter((item) => item["all_data_iter_4.date_year"] === parseInt(sel_year))
+    .map((item, index) => {
+      switch (item["all_data_iter_4.zone"]) {
+        case "West":
+          west_rev = item["all_data_iter_4.total_revenue"].toFixed(2);
+          break;
+        case "East":
+          east_rev = item["all_data_iter_4.total_revenue"].toFixed(2);
+          break;
+        case "North":
+          north_rev = item["all_data_iter_4.total_revenue"].toFixed(2);
+          break;
+        case "South":
+          south_rev = item["all_data_iter_4.total_revenue"].toFixed(2);
+          break;
+      }
+    });
   const pointers = [
-    { id: 1, left: 220, top: 200 , color: '#FF0000',content: { title: "Northern Zone", value: north_rev } },
-    { id: 2, left: 120, top: 400 , color:'#FFA500',content: { title: "Western Zone", value: west_rev } },
-    { id: 3, left: 430, top: 380 , color: '#000000',content: { title: "Eastern Zone", value: east_rev } },
-    { id: 4, left: 235, top: 565 , color: '#008000',content: { title: "Southern Zone", value: south_rev } },
+    {
+      id: 1,
+      left: 220,
+      top: 200,
+      color: "#FF0000",
+      content: { title: "Northern Zone", value: north_rev },
+    },
+    {
+      id: 2,
+      left: 120,
+      top: 400,
+      color: "#FFA500",
+      content: { title: "Western Zone", value: west_rev },
+    },
+    {
+      id: 3,
+      left: 430,
+      top: 380,
+      color: "#000000",
+      content: { title: "Eastern Zone", value: east_rev },
+    },
+    {
+      id: 4,
+      left: 235,
+      top: 565,
+      color: "#008000",
+      content: { title: "Southern Zone", value: south_rev },
+    },
   ];
   return (
     <div style={{ width: "100%" }}>
       <div className="sales" style={{ padding: "20px" }}>
-        <select name="year" id="years" onChange={selectYearFunc}>
-          <option value="2022">2022</option>
-          <option value="2021">2021</option>
-          <option value="2020">2020</option>
-        </select>
         <div style={{ display: "flex", height: "700px" }}>
           <div style={{ flex: 1 }}>
             <Leftcard sel_year={sel_year} />
@@ -109,6 +132,16 @@ function Sales({ text, label }) {
                 transition: "transform 0.3s ease-in-out",
               }}
             >
+              <select
+                name="year"
+                id="years"
+                onChange={selectYearFunc}
+                className="map-year-select"
+              >
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+              </select>
               <img
                 src={"/Map.png"}
                 style={{
@@ -142,7 +175,7 @@ function Sales({ text, label }) {
                 <Tooltip
                   open={isHovered1 === index}
                   onClose={handleMouseLeave1}
-                  title={<SalesTool />}
+                  title={<SalesTool index={index} />}
                 >
                   {/* <SalesTool /> */}
                 </Tooltip>
@@ -175,7 +208,7 @@ function Sales({ text, label }) {
                       paddingRight: "4px",
                     }}
                   ></span>
-                   <span style={{padding: '8px'}}>
+                  <span style={{ padding: "8px" }}>
                     <p>{pointer.content.title}</p>
                     <h2>{pointer.content.value}</h2>
                   </span>
@@ -237,7 +270,7 @@ function Sales({ text, label }) {
         <Cards />
         <div>
           <h4 className="pieChart-heading">Inventory metrics</h4>
-          <Piechart sel_year={sel_year}/>
+          <Piechart sel_year={sel_year} />
         </div>
 
         <LineChart sel_year={sel_year} />

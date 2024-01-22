@@ -85,3 +85,17 @@
 .sales-leftcard-box:hover {
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.2);
 }
+
+.best-performer {
+  width: 100px;
+  padding: 4px 14px;
+  height: 20px;
+  font-weight: bold;
+  /* border: 1px solid black; */
+  position: relative;
+  top: 10px;
+  left: 150px;
+  border-radius: 15px;
+  color: red;
+  background-color: rgb(255, 162, 162);
+}
